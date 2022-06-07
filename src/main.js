@@ -1,4 +1,3 @@
-//技术架构：vue+vuex+vue-router+es6+webpack+axios+less+mock+swiper
 //引入Vue
 import Vue from 'vue';
 //引入App
