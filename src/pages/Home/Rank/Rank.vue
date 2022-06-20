@@ -35,7 +35,8 @@
             <div class="tab-info">
               <div class="info-title">
                 <a href="#"
-                  >啄木鸟（TUCANO）休闲裤男 商务休闲时尚西装裤弹力修身百搭裤子男装 黑色 32</a
+                  >啄木鸟（TUCANO）休闲裤男
+                  商务休闲时尚西装裤弹力修身百搭裤子男装 黑色 32</a
                 >
               </div>
               <p class="info-price">¥79.00</p>
@@ -50,7 +51,8 @@
             <div class="tab-info">
               <div class="info-title">
                 <a href="#"
-                  >3M 汽车贴膜 朗清系列 全车（深色）SUV 汽车膜 车膜 太阳膜 隔热膜 轿车 SUV MPV 全国包施工 汽车用品</a
+                  >3M 汽车贴膜 朗清系列 全车（深色）SUV 汽车膜 车膜 太阳膜
+                  隔热膜 轿车 SUV MPV 全国包施工 汽车用品</a
                 >
               </div>
               <p class="info-price">¥1499.00</p>
@@ -65,7 +67,8 @@
             <div class="tab-info">
               <div class="info-title">
                 <a href="#"
-                  >三星 SAMSUNG Galaxy S21 5G 5G手机 骁龙888 超高清摄像 120Hz护目屏  8G+128G 丝雾白ms</a
+                  >三星 SAMSUNG Galaxy S21 5G 5G手机 骁龙888 超高清摄像
+                  120Hz护目屏 8G+128G 丝雾白ms</a
                 >
               </div>
               <p class="info-price">¥3699.00</p>
@@ -80,7 +83,8 @@
             <div class="tab-info">
               <div class="info-title">
                 <a href="#"
-                  >洁柔(C&S) 洁面巾 一次性洗脸巾大规格6卷 加厚珍珠纹干湿两用 （6个替换装+2包装袋）新老品交替发货</a
+                  >洁柔(C&S) 洁面巾 一次性洗脸巾大规格6卷 加厚珍珠纹干湿两用
+                  （6个替换装+2包装袋）新老品交替发货</a
                 >
               </div>
               <p class="info-price">¥9.90</p>
@@ -94,8 +98,8 @@
       
 <script>
 export default {
-  name: "Rank",
-};
+  name: 'Rank',
+}
 </script>
       
 <style lang="less" scope>

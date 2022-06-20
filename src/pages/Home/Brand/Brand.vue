@@ -40,8 +40,8 @@
       
 <script>
 export default {
-  name: "Brand",
-};
+  name: 'Brand',
+}
 </script>
       
 <style lang="less" scope>

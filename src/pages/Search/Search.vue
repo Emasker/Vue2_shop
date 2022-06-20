@@ -22,7 +22,7 @@
             </li>
             <!-- 品牌的面包屑 -->
             <li class="with-x" v-if="searchParams.trademark">
-              {{ searchParams.trademark.split(":")[1]
+              {{ searchParams.trademark.split(':')[1]
               }}<i @click="removeTradeMark">×</i>
             </li>
             <!-- 商品属性面包屑 -->
@@ -31,7 +31,7 @@
               v-for="(attrValue, index) in searchParams.props"
               :key="index"
             >
-              {{ attrValue.split(":")[1] }}<i @click="removeAttr(index)">×</i>
+              {{ attrValue.split(':')[1] }}<i @click="removeAttr(index)">×</i>
             </li>
           </ul>
         </div>
@@ -94,7 +94,9 @@
                     }}</a>
                   </div>
                   <div class="commit">
-                    <i class="command">已有<span ref="mark">3412</span>人评价</i>
+                    <i class="command"
+                      >已有<span ref="mark">3412</span>人评价</i
+                    >
                   </div>
                 </div>
               </li>
@@ -114,23 +116,23 @@
 </template>
 
 <script>
-import SearchSelector from "./SearchSelector/SearchSelector";
-import { mapGetters, mapState } from "vuex";
+import SearchSelector from './SearchSelector/SearchSelector'
+import { mapGetters, mapState } from 'vuex'
 export default {
-  name: "Search",
+  name: 'Search',
   data() {
     return {
       searchParams: {
         //产品相应的id
-        category1Id: "",
-        category2Id: "",
-        category3Id: "",
+        category1Id: '',
+        category2Id: '',
+        category3Id: '',
         //产品的名字
-        categoryName: "",
+        categoryName: '',
         //搜索的关键字
-        keyword: "",
+        keyword: '',
         //排序:初始状态应该是综合且降序
-        order: "1:desc",
+        order: '1:desc',
         //第几页
         pageNo: 1,
         //每一页展示条数
@@ -138,137 +140,137 @@ export default {
         //平台属性的操作
         props: [],
         //品牌
-        trademark: "",
+        trademark: '',
       },
-    };
+    }
   },
   components: {
     SearchSelector,
   },
   beforeMount() {
     //在发请求之前整理好接口需要的参数数据
-    Object.assign(this.searchParams, this.$route.query, this.$route.params);
+    Object.assign(this.searchParams, this.$route.query, this.$route.params)
   },
   mounted() {
-    this.getData();
+    this.getData()
   },
   methods: {
     //把发请求的这个action封装到一个函数里面
     getData() {
-      this.$store.dispatch("getSearchList", this.searchParams);
+      this.$store.dispatch('getSearchList', this.searchParams)
     },
     //删除面包屑后请求query参数置空
     removeCategoryName() {
-      this.searchParams.categoryName = undefined;
-      this.searchParams.category1Id = undefined;
-      this.searchParams.category2Id = undefined;
-      this.searchParams.category3Id = undefined;
+      this.searchParams.categoryName = undefined
+      this.searchParams.category1Id = undefined
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined
       //置空后重新发送请求
-      this.getData();
+      this.getData()
       //删除query参数后重置地址栏
       if (this.$route.params) {
-        this.$router.push({ name: "search", params: this.$route.params });
+        this.$router.push({ name: 'search', params: this.$route.params })
       }
     },
     //删除关键字
     removeKeyword() {
       //置空参数
-      this.searchParams.keyword = undefined;
+      this.searchParams.keyword = undefined
       //重发请求
-      this.getData();
+      this.getData()
       //通知header清除关键字
-      this.$bus.$emit("clear");
+      this.$bus.$emit('clear')
       //重置路由
       if (this.$route.query) {
-        this.$router.push({ name: "search", query: this.$route.query });
+        this.$router.push({ name: 'search', query: this.$route.query })
       }
     },
     //拿到子组件品牌参数
     trademarkInfo(trademark) {
       //整理参数
-      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
       //再次发送请求
-      this.getData();
+      this.getData()
     },
     //删除品牌的信息
     removeTradeMark() {
       //置空
-      this.searchParams.trademark = undefined;
+      this.searchParams.trademark = undefined
       //请求
-      this.getData();
+      this.getData()
     },
     //收集平台属性信息
     attrInfo(attr, attrValue) {
       //整理参数
-      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`;
+      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`
       //去重后传参
       if (this.searchParams.props.indexOf(props) == -1)
-        this.searchParams.props.push(props);
+        this.searchParams.props.push(props)
       //再请求
-      this.getData();
+      this.getData()
     },
     //删除商品的属性
     removeAttr(index) {
       //整理参数
-      this.searchParams.props.splice(index, 1);
+      this.searchParams.props.splice(index, 1)
       //再请求
-      this.getData();
+      this.getData()
     },
     //排序操作
     changeOrder(flag) {
       //flag用于区分1、2
-      let originOrder = this.searchParams.order;
-      let originFlag = originOrder.split(":")[0];
-      let originSort = originOrder.split(":")[1];
-      let newOrder = "";
+      let originOrder = this.searchParams.order
+      let originFlag = originOrder.split(':')[0]
+      let originSort = originOrder.split(':')[1]
+      let newOrder = ''
       //判断重复点击
       if (flag == originFlag) {
-        newOrder = `${originFlag}:${originSort == "desc" ? "asc" : "desc"}`;
+        newOrder = `${originFlag}:${originSort == 'desc' ? 'asc' : 'desc'}`
       } else {
-        newOrder = `${flag}:${"desc"}`;
+        newOrder = `${flag}:${'desc'}`
       }
       //重新赋值
-      this.searchParams.order = newOrder;
+      this.searchParams.order = newOrder
       //请求
-      this.getData();
+      this.getData()
     },
     //获取当前页面
     getPageNo(pageNo) {
       //整理参数
-      this.searchParams.pageNo = pageNo;
+      this.searchParams.pageNo = pageNo
       //再次发请求
-      this.getData();
+      this.getData()
     },
   },
   computed: {
-    ...mapGetters(["goodsList"]),
+    ...mapGetters(['goodsList']),
     ...mapState({ total: (state) => state.search.searchList.total }),
     //判断排序
     isOne() {
-      return this.searchParams.order.includes("1");
+      return this.searchParams.order.includes('1')
     },
     isTwo() {
-      return this.searchParams.order.includes("2");
+      return this.searchParams.order.includes('2')
     },
     isAsc() {
-      return this.searchParams.order.includes("asc");
+      return this.searchParams.order.includes('asc')
     },
     isDesc() {
-      return this.searchParams.order.includes("desc");
+      return this.searchParams.order.includes('desc')
     },
   },
   watch: {
     //监听路由的信息是否发生变化，如果发生变化，再次发起请求
     $route() {
-      Object.assign(this.searchParams, this.$route.query, this.$route.params);
-      this.getData();
+      Object.assign(this.searchParams, this.$route.query, this.$route.params)
+      this.getData()
       //每一次请求完把相应的1、2、3级分类的id置空
-      this.searchParams.category1Id = undefined;
-      this.searchParams.category2Id = undefined;
-      this.searchParams.category3Id = undefined;
+      this.searchParams.category1Id = undefined
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -412,7 +414,7 @@ export default {
                 padding-left: 15px;
                 width: 215px;
                 height: 255px;
-                
+
                 a {
                   color: #666;
 

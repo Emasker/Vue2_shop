@@ -3,7 +3,11 @@
     <button :disabled="pageNo == 1" @click="$emit('getPageNo', pageNo - 1)">
       上一页
     </button>
-    <button v-if="startNumAndEndNum.start > 1" @click="$emit('getPageNo', 1)" :class="{active:pageNo==1}">
+    <button
+      v-if="startNumAndEndNum.start > 1"
+      @click="$emit('getPageNo', 1)"
+      :class="{ active: pageNo == 1 }"
+    >
       1
     </button>
 
@@ -14,7 +18,7 @@
       :key="index"
       v-show="page >= startNumAndEndNum.start"
       @click="$emit('getPageNo', page)"
-       :class="{active:pageNo==page}"
+      :class="{ active: pageNo == page }"
     >
       {{ page }}
     </button>
@@ -24,7 +28,7 @@
     <button
       v-if="startNumAndEndNum.end < totalPage"
       @click="$emit('getPageNo', totalPage)"
-       :class="{active:pageNo== totalPage}"
+      :class="{ active: pageNo == totalPage }"
     >
       {{ totalPage }}
     </button>
@@ -41,38 +45,38 @@
 
 <script>
 export default {
-  name: "Pagination",
-  props: ["pageNo", "pageSize", "total", "continues"],
+  name: 'Pagination',
+  props: ['pageNo', 'pageSize', 'total', 'continues'],
   computed: {
     //计算页数
     totalPage() {
-      return Math.ceil(this.total / this.pageSize);
+      return Math.ceil(this.total / this.pageSize)
     },
     //计算连续页码
     startNumAndEndNum() {
-      const { continues, pageNo, totalPage } = this;
+      const { continues, pageNo, totalPage } = this
       let start = 0,
-        end = 0;
+        end = 0
       //总页数没有连续页码多时
       if (continues > totalPage) {
-        start = 1;
-        end = totalPage;
+        start = 1
+        end = totalPage
       } else {
-        start = pageNo - parseInt(continues / 2);
-        end = pageNo + parseInt(continues / 2);
+        start = pageNo - parseInt(continues / 2)
+        end = pageNo + parseInt(continues / 2)
         if (start < 1) {
-          start = 1;
-          end = continues;
+          start = 1
+          end = continues
         }
         if (end > totalPage) {
-          end = totalPage;
-          start = totalPage - continues + 1;
+          end = totalPage
+          start = totalPage - continues + 1
         }
       }
-      return { start, end };
+      return { start, end }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

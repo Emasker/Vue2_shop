@@ -40,10 +40,7 @@
                         >
                       </dt>
                       <dd>
-                        <em
-                          v-for="c3 in c2.categoryChild"
-                          :key="c3.categoryId"
-                        >
+                        <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
                           <a
                             :data-categoryName="c3.categoryName"
                             :data-category3Id="c3.categoryId"
@@ -74,21 +71,21 @@
 </template>
       
 <script>
-import { mapState } from "vuex"; //引入vuex仓库
-import throttle from "lodash/throttle"; //按需引入lodash节流
+import { mapState } from 'vuex' //引入vuex仓库
+import throttle from 'lodash/throttle' //按需引入lodash节流
 export default {
-  name: "TypeNav",
+  name: 'TypeNav',
   data() {
     return {
       currentIndex: -1, //决定了到底那个h3身上有类名
       show: true, //控制商品列表的显示
-    };
+    }
   },
   //在mounted生命周期函数中发送请求
   mounted() {
-    if (this.$route.path != "/home") {
+    if (this.$route.path != '/home') {
       //如果不是home路由使show=false
-      this.show = false;
+      this.show = false
     }
   },
   computed: {
@@ -101,61 +98,60 @@ export default {
     //使用lodash节流
     changeIndex: throttle(function (index) {
       //用于修改组件实例身上的currentIndex的属性值
-      this.currentIndex = index;
+      this.currentIndex = index
     }, 50),
     //跳转Search路由
     goSearch(event) {
       //event.target获取到的是出发事件的元素
-      let node = event.target;
+      let node = event.target
       //给a标签添加了自定义属性
-      let { categoryname, category1id, category2id, category3id } =
-        node.dataset;
+      let { categoryname, category1id, category2id, category3id } = node.dataset
       //if一定是a标签
       if (categoryname) {
         //准备路由跳转的参数对象
-        let location = { name: "search" };
-        let query = { categoryName: categoryname };
+        let location = { name: 'search' }
+        let query = { categoryName: categoryname }
         //一级目录
         if (category1id) {
-          query.category1Id = category1id;
+          query.category1Id = category1id
           //二级目录
         } else if (category2id) {
-          query.category2Id = category2id;
+          query.category2Id = category2id
           //三级目录
         } else {
-          query.category3Id = category3id;
+          query.category3Id = category3id
         }
         //如果路由跳转的时候，带有params参数,则一同携带传递
         if (this.$route.params) {
-          location.params = this.$route.params;
+          location.params = this.$route.params
           //动态给location配置对象添加query属性
-          location.query = query;
+          location.query = query
           //路由跳转
-          this.$router.push(location);
+          this.$router.push(location)
         }
       }
     },
     //鼠标进入列表展示动画
     enterShow() {
-      if (this.$route.path != "/home") {
-        this.show = true;
+      if (this.$route.path != '/home') {
+        this.show = true
       }
     },
     //当鼠标离开的时候，让商品分类列表进行隐藏
     leaveShow() {
-      this.currentIndex = -1;
+      this.currentIndex = -1
       //在search路由下才会控制show
-      if (this.$route.path != "/home") {
-        this.show = false;
+      if (this.$route.path != '/home') {
+        this.show = false
       }
     },
   },
-};
+}
 </script>
       
 <style lang="less" scope>
 .type-nav {
-   border-bottom: 2px solid #e1251b;
+  border-bottom: 2px solid #e1251b;
   .container {
     width: 1200px;
     margin: 0 auto;
@@ -180,11 +176,10 @@ export default {
         line-height: 45px;
         font-size: 16px;
         color: #333;
-        &:hover{
+        &:hover {
           color: #e1251b;
         }
-      } 
-     
+      }
     }
 
     .sort {
@@ -196,7 +191,6 @@ export default {
       position: absolute;
       background: #fafafa;
       z-index: 999;
-  
 
       .all-sort-list2 {
         .item {

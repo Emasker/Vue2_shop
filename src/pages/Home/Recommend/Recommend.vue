@@ -28,8 +28,8 @@
       
 <script>
 export default {
-  name: "Recommend",
-};
+  name: 'Recommend',
+}
 </script>
       
 <style lang="less" scope>

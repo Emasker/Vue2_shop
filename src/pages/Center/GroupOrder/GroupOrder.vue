@@ -1,15 +1,12 @@
 <template>
-  <div>  
-      group
-  </div>
+  <div>group</div>
 </template>
       
 <script>
 export default {
-  name:"GroupOrder",
+  name: 'GroupOrder',
 }
 </script>
       
 <style scope>
-      
 </style>

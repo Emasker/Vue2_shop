@@ -78,28 +78,28 @@
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      phone: "",
-      password: "",
-    };
+      phone: '',
+      password: '',
+    }
   },
   methods: {
     //登录回调
     async userLogin() {
       try {
-        const { phone, password } = this;
+        const { phone, password } = this
         phone &&
           password &&
-          (await this.$store.dispatch("userLogin", { phone, password }));
-        this.$router.push("/home");
+          (await this.$store.dispatch('userLogin', { phone, password }))
+        this.$router.push('/home')
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

@@ -31,31 +31,31 @@
       
 <script>
 export default {
-  name: "HeadSearch",
+  name: 'HeadSearch',
   data() {
     return {
-      keyword: "",
-    };
+      keyword: '',
+    }
   },
   methods: {
     goSearch() {
       //代表的是如果有query参数也带过去
       let location = {
-        name: "search",
+        name: 'search',
         params: { keyword: this.keyword || undefined },
         query: this.$route.query,
-      };
-      location.query = this.$route.query;
-      this.$router.push(location);
+      }
+      location.query = this.$route.query
+      this.$router.push(location)
     },
   },
   //通过$bus清空输入框
   mounted() {
-    this.$bus.$on("clear",()=>{
-      this.keyword="";
+    this.$bus.$on('clear', () => {
+      this.keyword = ''
     })
   },
-};
+}
 </script>
       
 <style lang="less" scope>

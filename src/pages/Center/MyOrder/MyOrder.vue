@@ -153,33 +153,33 @@
       
 <script>
 export default {
-  name: "myOrder",
+  name: 'myOrder',
   data() {
     return {
       page: 1,
       limit: 3,
       myOrder: {},
-    };
+    }
   },
   mounted() {
     //获取订单的数据
-    this.getData();
+    this.getData()
   },
   methods: {
     async getData() {
-      const { page, limit } = this;
-      let result = await this.$API.reqMyOrderList(page, limit);
+      const { page, limit } = this
+      let result = await this.$API.reqMyOrderList(page, limit)
       if (result.code == 200) {
-        this.myOrder = result.data;
+        this.myOrder = result.data
       }
     },
     //获取当前页数
-    getPageNo(page){
-      this.page=page;
-      this.getData();
-    }
+    getPageNo(page) {
+      this.page = page
+      this.getData()
+    },
   },
-};
+}
 </script>
       
 <style scope>

@@ -7,20 +7,20 @@ export default [
     //首页
     {
         path: "/home",
-        component: ()=>import("@/pages/Home/Home.vue"),
+        component: () => import("@/pages/Home/Home.vue"),
         meta: {
             show: true,
-            title:'首页',
+            title: '首页',
         }
     },
     //搜索页
     {
         name: 'search',
         path: '/search/:keyword?',
-        component: ()=>import("@/pages/Search/Search.vue"),
+        component: () => import("@/pages/Search/Search.vue"),
         meta: {
             show: true,
-            title:'搜索',
+            title: '搜索',
         },
         // 将params参数和query参数映射成属性传入路由组件
         props: route => ({
@@ -31,64 +31,64 @@ export default [
     //登录页
     {
         path: "/login",
-        component: ()=>import("@/pages/Login/Login.vue"),
+        component: () => import("@/pages/Login/Login.vue"),
         meta: {
             show: false,
-            title:'用户登录',
+            title: '用户登录',
         }
     },
     //注册页
     {
         path: "/register",
-        component:()=>import("@/pages/Register/Register.vue"),
+        component: () => import("@/pages/Register/Register.vue"),
         meta: {
             show: false,
-            title:'用户注册',
+            title: '用户注册',
         }
     },
     //详情页
     {
         name: 'detail',
         path: '/detail/:skuId',
-        component:()=>import("@/pages/Detail/Detail.vue"),
+        component: () => import("@/pages/Detail/Detail.vue"),
         meta: {
             show: true,
-            title:'产品详情',
+            title: '产品详情',
         }
     },
     //加购成功页
     {
         name: 'addcartsuccess',
         path: '/addcartsuccess',
-        component: ()=>import('@/pages/AddCartSuccess/AddCartSuccess.vue'),
+        component: () => import('@/pages/AddCartSuccess/AddCartSuccess.vue'),
         meta: {
             show: true,
-            title:'添加成功',
+            title: '添加成功',
         },
     },
     //购物车
     {
         path: '/shopcart',
-        component: ()=>import('@/pages/ShopCart/ShopCart.vue'),
+        component: () => import('@/pages/ShopCart/ShopCart.vue'),
         meta: {
             show: true,
-            title:'购物车',
+            title: '购物车',
         },
     },
     //交易页面
     {
         path: '/trade',
-        component: ()=>import('@/pages/Trade/Trade.vue'),
+        component: () => import('@/pages/Trade/Trade.vue'),
         meta: {
             show: true,
-            title:'确认订单',
-        },  
+            title: '确认订单',
+        },
         //路由独享守卫,只能从购物车页面来
         beforeEnter: (to, from, next) => {
-          
+
             if (from.path == '/shopcart') {
                 next();
-            }else{
+            } else {
                 next(false);
             }
         }
@@ -96,10 +96,10 @@ export default [
     //支付页面
     {
         path: '/pay',
-        component:()=>import('@/pages/Pay/Pay.vue'),
+        component: () => import('@/pages/Pay/Pay.vue'),
         meta: {
             show: true,
-            title:'等待支付',
+            title: '等待支付',
         },
         props: route => ({
             orderId: route.query.orderId
@@ -116,16 +116,16 @@ export default [
     //支付成功页面
     {
         path: '/paySuccess',
-        component: ()=>import('@/pages/PaySuccess/PaySuccess.vue'),
+        component: () => import('@/pages/PaySuccess/PaySuccess.vue'),
         meta: {
             show: true,
-            title:'支付成功',
+            title: '支付成功',
         },
     },
     //个人中心页面
     {
         path: '/center',
-        component:()=>import('@/pages/Center/Center.vue'),
+        component: () => import('@/pages/Center/Center.vue'),
         meta: {
             show: true
         },
@@ -133,15 +133,15 @@ export default [
             //我的订单二级路由
             {
                 path: "myorder",
-                component: ()=>import('@/pages/Center/MyOrder/MyOrder.vue'),
+                component: () => import('@/pages/Center/MyOrder/MyOrder.vue'),
                 meta: {
                     show: true,
-                    title:'我的订单',
+                    title: '我的订单',
                 },
             },
             {
                 path: 'grouporder',
-                component:()=>import('@/pages/Center/MyOrder/MyOrder.vue')/* ('@/pages/Center/GroupOrder/GroupOrder.vue') */,
+                component: () => import('@/pages/Center/MyOrder/MyOrder.vue') /* ('@/pages/Center/GroupOrder/GroupOrder.vue') */ ,
                 meta: {
                     show: true
                 },

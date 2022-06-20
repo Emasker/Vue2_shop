@@ -100,115 +100,115 @@
 </template>
 
 <script>
-import throttle from "lodash/throttle";
-import { mapGetters } from "vuex";
+import throttle from 'lodash/throttle'
+import { mapGetters } from 'vuex'
 export default {
-  name: "ShopCart",
+  name: 'ShopCart',
   mounted() {
-    this.getData();
+    this.getData()
   },
   methods: {
     //获取个人购物车数据
     getData() {
-      this.$store.dispatch("getCartList");
+      this.$store.dispatch('getCartList')
     },
     //修改商品个数(节流)
     handler: throttle(async function (type, disNum, cart) {
       switch (type) {
-        case "add":
-          disNum = 1;
-          break;
-        case "minus":
-          disNum = cart.skuNum > 1 ? -1 : 0;
-          break;
-        case "change":
+        case 'add':
+          disNum = 1
+          break
+        case 'minus':
+          disNum = cart.skuNum > 1 ? -1 : 0
+          break
+        case 'change':
           if (isNaN(disNum) || disNum < 1) {
-            disNum = 0;
+            disNum = 0
           } else {
-            disNum = parseInt(disNum) - cart.skuNum;
+            disNum = parseInt(disNum) - cart.skuNum
           }
-          break;
+          break
       }
       try {
-        await this.$store.dispatch("addOrUpdateShopCart", {
+        await this.$store.dispatch('addOrUpdateShopCart', {
           skuId: cart.skuId,
           skuNum: disNum,
-        });
-        this.getData();
+        })
+        this.getData()
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     }, 500),
     //删除商品
     async deleteCartById(cart) {
       try {
-        await this.$store.dispatch("deleteCartListBySkuId", cart.skuId);
-        this.getData();
+        await this.$store.dispatch('deleteCartListBySkuId', cart.skuId)
+        this.getData()
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
     //修改选中状态
     async updateCheckedById(cart, event) {
       try {
-        let isChecked = event.target.checked ? "1" : "0";
-        await this.$store.dispatch("updateCheckedById", {
+        let isChecked = event.target.checked ? '1' : '0'
+        await this.$store.dispatch('updateCheckedById', {
           skuId: cart.skuId,
           isChecked,
-        });
-        this.getData();
+        })
+        this.getData()
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
     //删除全部选中商品
     async deleteAllCheckedCart() {
       try {
-        await this.$store.dispatch("deleteAllCheckedCart");
-        this.getData();
+        await this.$store.dispatch('deleteAllCheckedCart')
+        this.getData()
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
     //修改全选状态
     async updateAllCartChecked(event) {
       try {
-        let isChecked = event.target.checked ? "1" : "0";
-        await this.$store.dispatch("updateAllCartIsChecked", isChecked);
-        this.getData();
+        let isChecked = event.target.checked ? '1' : '0'
+        await this.$store.dispatch('updateAllCartIsChecked', isChecked)
+        this.getData()
       } catch (error) {
-        alert(error.message);
+        alert(error.message)
       }
     },
   },
   computed: {
-    ...mapGetters(["cartList"]),
+    ...mapGetters(['cartList']),
     //购物车数据
     cartInfoList() {
-      return this.cartList.cartInfoList || [];
+      return this.cartList.cartInfoList || []
     },
     //购买商品总数
     totalNum() {
-      let total = 0;
+      let total = 0
       this.cartInfoList.forEach((item) => {
-        if (item.isChecked == 1) total++;
-      });
-      return total;
+        if (item.isChecked == 1) total++
+      })
+      return total
     },
     //购买商品总价
     totalPrice() {
-      let sum = 0;
+      let sum = 0
       this.cartInfoList.forEach((item) => {
-        if (item.isChecked == 1) sum += item.skuNum * item.skuPrice;
-      });
-      return sum;
+        if (item.isChecked == 1) sum += item.skuNum * item.skuPrice
+      })
+      return sum
     },
     //是否全选
     isAllCheck() {
-      return this.cartInfoList.every((item) => item.isChecked == 1);
+      return this.cartInfoList.every((item) => item.isChecked == 1)
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -416,7 +416,7 @@ export default {
           color: #fff;
           text-align: center;
           font-size: 18px;
-          font-family: "Microsoft YaHei";
+          font-family: 'Microsoft YaHei';
           background: #e1251b;
           overflow: hidden;
         }

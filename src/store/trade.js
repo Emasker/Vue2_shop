@@ -3,8 +3,8 @@ import {
     reqOrderInfo
 } from '@/api/index';
 const state = {
-    address:[],
-    orderInfo:{}
+    address: [],
+    orderInfo: {}
 };
 const actions = {
     //获取用户地址信息
@@ -12,24 +12,26 @@ const actions = {
         commit
     }) {
         let result = await reqAddressInfo();
-        if(result.code==200){
-            commit('GETUSERADDRESS',result.data);
+        if (result.code == 200) {
+            commit('GETUSERADDRESS', result.data);
         }
     },
     //获得购物车清单
-    async getOrderInfo({commit}){
+    async getOrderInfo({
+        commit
+    }) {
         let result = await reqOrderInfo();
-        if(result.code==200){
-            commit('GETORDERINFO',result.data);
+        if (result.code == 200) {
+            commit('GETORDERINFO', result.data);
         }
     }
 };
 const mutations = {
-    GETUSERADDRESS(state,address){
-        state.address=address;
+    GETUSERADDRESS(state, address) {
+        state.address = address;
     },
-    GETORDERINFO(state,orderInfo){
-        state.orderInfo=orderInfo;
+    GETORDERINFO(state, orderInfo) {
+        state.orderInfo = orderInfo;
     }
 };
 const getters = {};

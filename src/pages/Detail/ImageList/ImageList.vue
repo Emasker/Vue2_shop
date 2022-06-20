@@ -6,10 +6,10 @@
         v-for="(slide, index) in skuImageList"
         :key="index"
       >
-        <img 
-        :src="slide.imgUrl" 
-        :class="{active:currentIndex==index}"
-        @click="changeCurrentIndex(index)"
+        <img
+          :src="slide.imgUrl"
+          :class="{ active: currentIndex == index }"
+          @click="changeCurrentIndex(index)"
         />
       </div>
     </div>
@@ -19,15 +19,15 @@
 </template>
 
 <script>
-import Swiper from "swiper";
+import Swiper from 'swiper'
 export default {
-  name: "ImageList",
+  name: 'ImageList',
   data() {
     return {
-      currentIndex:0,
+      currentIndex: 0,
     }
   },
-  props: ["skuImageList"],
+  props: ['skuImageList'],
   watch: {
     skuImageList: {
       immediate: true,
@@ -40,24 +40,24 @@ export default {
             //每次切换几张图
             slidePerGroup: 1,
             navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
             },
-          });
-        });
+          })
+        })
       },
     },
   },
   methods: {
     //轮播图片显示
-    changeCurrentIndex(index){
+    changeCurrentIndex(index) {
       //修改图片索引
-      this.currentIndex=index;
+      this.currentIndex = index
       //通知Zoom组件更换大图索引
-      this.$bus.$emit('getIndex',this.currentIndex)
-    }
+      this.$bus.$emit('getIndex', this.currentIndex)
+    },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

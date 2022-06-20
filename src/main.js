@@ -12,9 +12,9 @@ import TypeNav from '@/components/TypeNav/TypeNav'; //三级菜单
 import Carousel from '@/components/Carousel/Carousel'; //轮播图
 import Pagination from '@/components/Pagination/Pagination'; //分页器
 //注册全局组件
-Vue.component(TypeNav.name, TypeNav); //三级菜单
-Vue.component(Carousel.name, Carousel); //轮播图
-Vue.component(Pagination.name, Pagination); //分页器
+Vue.component(TypeNav.name, TypeNav); 
+Vue.component(Carousel.name, Carousel); 
+Vue.component(Pagination.name, Pagination);
 
 //按需引入element-ui
 import {

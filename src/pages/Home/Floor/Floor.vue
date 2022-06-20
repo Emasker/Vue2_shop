@@ -61,26 +61,26 @@
 </template>
       
 <script>
-import Swiper from "swiper";
+import Swiper from 'swiper'
 export default {
-  name: "Floor",
-  props: ["list"],
+  name: 'Floor',
+  props: ['list'],
   mounted() {
     new Swiper(this.$refs.floor1Swiper, {
       loop: true, // 循环模式选项
       // 如果需要分页器
       pagination: {
-        el: ".swiper-pagination",
+        el: '.swiper-pagination',
         clickable: true,
       },
       // 如果需要前进后退按钮
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
-    });
+    })
   },
-};
+}
 </script>
       
 <style lang="less" scope>
@@ -118,7 +118,7 @@ export default {
               background-color: #fff;
 
               &::after {
-                content: "|";
+                content: '|';
                 padding: 0 10px;
               }
             }
@@ -126,7 +126,7 @@ export default {
             &:nth-child(7) {
               a {
                 &::after {
-                  content: "";
+                  content: '';
                 }
               }
             }

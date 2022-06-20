@@ -356,67 +356,70 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import ImageList from "./ImageList/ImageList";
-import Zoom from "./Zoom/Zoom";
+import { mapGetters } from 'vuex'
+import ImageList from './ImageList/ImageList'
+import Zoom from './Zoom/Zoom'
 
 export default {
-  name: "Detail",
+  name: 'Detail',
   data() {
     return {
       //购买件数
       skuNum: 1,
-    };
+    }
   },
   components: {
     ImageList,
     Zoom,
   },
   mounted() {
-    this.$store.dispatch("getGoodInfo", this.$route.params.skuId);
+    this.$store.dispatch('getGoodInfo', this.$route.params.skuId)
   },
   computed: {
-    ...mapGetters(["categoryView", "skuInfo", "spuSaleAttrList"]),
+    ...mapGetters(['categoryView', 'skuInfo', 'spuSaleAttrList']),
     skuImageList() {
       //如果服务器数据没有回来，skuInfo这个对象是空对象
-      return this.skuInfo.skuImageList || [];
+      return this.skuInfo.skuImageList || []
     },
   },
   methods: {
     //选中属性高亮
     changeActive(saleAttrValue, arr) {
       arr.forEach((item) => {
-        item.isChecked = "0";
-      });
-      saleAttrValue.isChecked = "1";
+        item.isChecked = '0'
+      })
+      saleAttrValue.isChecked = '1'
     },
     //监听购买数量
     changeSkuNum(event) {
-      let value = event.target.value;
-      console.log(value);
+      let value = event.target.value
+      console.log(value)
       if (/^\d+$/.test(value)) {
-        this.skuNum = value;
+        this.skuNum = value
       } else {
-        this.skuNum = 1;
+        this.skuNum = 1
       }
     },
     //添加商品到购物车
     async addShopcar() {
       try {
         //整理参数
-        await this.$store.dispatch("addOrUpdateShopCart", {
+        await this.$store.dispatch('addOrUpdateShopCart', {
           skuId: this.$route.params.skuId,
           skuNum: this.skuNum,
-        });
-        sessionStorage.setItem("SKUINFO",JSON.stringify(this.skuInfo))
+        })
+        sessionStorage.setItem('SKUINFO', JSON.stringify(this.skuInfo))
         //请求成功则路由跳转
-        this.$router.push({name:"addcartsuccess",query:{skuNum:this.skuNum}});
+        this.$router.push({
+          name: 'addcartsuccess',
+          query: { skuNum: this.skuNum },
+        })
       } catch (error) {
-        alert(error.message);
+        alert(error.message)
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -429,7 +432,7 @@ export default {
       padding: 9px 15px 9px 0;
 
       & > span + span:before {
-        content: "/\00a0";
+        content: '/\00a0';
         padding: 0 5px;
         color: #ccc;
       }

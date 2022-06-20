@@ -109,19 +109,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import dayjs from "dayjs";
+import { mapState } from 'vuex'
+import dayjs from 'dayjs'
 export default {
-  name: "Trade",
+  name: 'Trade',
   data() {
     return {
-      message: "",
-      orderId:""
-    };
+      message: '',
+      orderId: '',
+    }
   },
   mounted() {
-    this.$store.dispatch("getUserAddress");
-    this.$store.dispatch("getOrderInfo");
+    this.$store.dispatch('getUserAddress')
+    this.$store.dispatch('getOrderInfo')
   },
   computed: {
     ...mapState({
@@ -130,41 +130,41 @@ export default {
     }),
     //提交默认地址
     userDefaultAddress() {
-      return this.addressInfo.find((item) => item.isDefault == 1) || {};
+      return this.addressInfo.find((item) => item.isDefault == 1) || {}
     },
     //返回快递送达时间
     getDay() {
-      let afterThree = dayjs().add(3, "day");
-      return dayjs(afterThree).locale("zh-cn").format("MM月DD日");
+      let afterThree = dayjs().add(3, 'day')
+      return dayjs(afterThree).locale('zh-cn').format('MM月DD日')
     },
   },
   methods: {
     //选择地址
     changeDefault(address, addressInfo) {
-      addressInfo.forEach((item) => (item.isDefault = 0));
-      address.isDefault = 1;
+      addressInfo.forEach((item) => (item.isDefault = 0))
+      address.isDefault = 1
     },
     //提交订单
-   async submitOrder() {
-      let { tradeNo } = this.orderInfo;
+    async submitOrder() {
+      let { tradeNo } = this.orderInfo
       let data = {
         consignee: this.userDefaultAddress.consignee, //最终收件人的名字
         consigneeTel: this.userDefaultAddress.phoneNum, //最终收件人的手机号
         deliveryAddress: this.userDefaultAddress.fullAddress, //收件人的地址
-        paymentWay: "ONLINE", //支付方式
+        paymentWay: 'ONLINE', //支付方式
         orderComment: this.msg, //买家的留言信息
         orderDetailList: this.orderInfo.detailArrayList, //商品清单
-      };
-     let result = await this.$API.reqSubmitOrder(tradeNo,data);
-     if(result.code==200){
-       this.orderId=result.data;
-       this.$router.push('/pay?orderId='+this.orderId)
-     }else{
-       alert(result.data);
-     }
+      }
+      let result = await this.$API.reqSubmitOrder(tradeNo, data)
+      if (result.code == 200) {
+        this.orderId = result.data
+        this.$router.push('/pay?orderId=' + this.orderId)
+      } else {
+        alert(result.data)
+      }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -204,7 +204,7 @@ export default {
       }
 
       .username::after {
-        content: "";
+        content: '';
         display: none;
         width: 13px;
         height: 13px;
@@ -408,7 +408,7 @@ export default {
       float: right;
       width: 164px;
       height: 56px;
-      font: 700 18px "微软雅黑";
+      font: 700 18px '微软雅黑';
       line-height: 56px;
       text-align: center;
       color: #fff;

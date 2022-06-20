@@ -58,8 +58,8 @@
       
 <script>
 export default {
-  name: "Like",
-};
+  name: 'Like',
+}
 </script>
       
 <style lang="less" scope>

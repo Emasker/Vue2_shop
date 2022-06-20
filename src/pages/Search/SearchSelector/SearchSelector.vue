@@ -1,59 +1,63 @@
 <template>
-	<div class="clearfix selector">
-		<div class="type-wrap logo">
-			<div class="fl key brand">品牌 :</div>
-			<div class="value">
-				<!-- 品牌地方 -->
-				<ul class="logo-list">
-					<li v-for="trademark in trademarkList" :key="trademark.tmId"
-						@click="tradeMarkHandler(trademark)">
-						{{ trademark.tmName }}
-					</li>
-				</ul>
-			</div>
-			<div class="ext">
-				<a href="javascript:void(0);" class="sui-btn">多选</a>
-				<a href="javascript:void(0);" class="sui-btn">更多></a>
-			</div>
-		</div>
-		<!-- 平台售卖属性的地方 -->
-		<div class="type-wrap" v-for="attr in attrsList" :key="attr.attrId">
-			<!-- 平台售卖属性:比如说颜色 -->
-			<div class="fl key">{{ attr.attrName }} :</div>
-			<div class="fl value">
-				<ul class="type-list">
-					<li v-for="attrValue in attr.attrValueList" :key="attrValue"
-						@click="attrInfo(attr,attrValue)">
-						<a>{{ attrValue }}</a>
-					</li>
-				</ul>
-			</div>
-			<div class="fl ext"></div>
-		</div>
-	</div>
+  <div class="clearfix selector">
+    <div class="type-wrap logo">
+      <div class="fl key brand">品牌 :</div>
+      <div class="value">
+        <!-- 品牌地方 -->
+        <ul class="logo-list">
+          <li
+            v-for="trademark in trademarkList"
+            :key="trademark.tmId"
+            @click="tradeMarkHandler(trademark)"
+          >
+            {{ trademark.tmName }}
+          </li>
+        </ul>
+      </div>
+      <div class="ext">
+        <a href="javascript:void(0);" class="sui-btn">多选</a>
+        <a href="javascript:void(0);" class="sui-btn">更多></a>
+      </div>
+    </div>
+    <!-- 平台售卖属性的地方 -->
+    <div class="type-wrap" v-for="attr in attrsList" :key="attr.attrId">
+      <!-- 平台售卖属性:比如说颜色 -->
+      <div class="fl key">{{ attr.attrName }} :</div>
+      <div class="fl value">
+        <ul class="type-list">
+          <li
+            v-for="attrValue in attr.attrValueList"
+            :key="attrValue"
+            @click="attrInfo(attr, attrValue)"
+          >
+            <a>{{ attrValue }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="fl ext"></div>
+    </div>
+  </div>
 </template>
 
 <script>
-	import {
-		mapGetters
-	} from "vuex";
-	export default {
-		name: "SearchSelector",
-		computed: {
-			...mapGetters(["trademarkList", "attrsList"]),
-		},
-		methods: {
-			//品牌的事件处理函数
-			tradeMarkHandler(trademark) {
-				//子组件信息传递给父组件
-				this.$emit('trademarkInfo', trademark);
-			},
-			//售卖属性值的点击事件
-			attrInfo(attr, attrValue) {
-				this.$emit("attrInfo", attr, attrValue);
-			}
-		},
-	};
+import { mapGetters } from 'vuex'
+export default {
+  name: 'SearchSelector',
+  computed: {
+    ...mapGetters(['trademarkList', 'attrsList']),
+  },
+  methods: {
+    //品牌的事件处理函数
+    tradeMarkHandler(trademark) {
+      //子组件信息传递给父组件
+      this.$emit('trademarkInfo', trademark)
+    },
+    //售卖属性值的点击事件
+    attrInfo(attr, attrValue) {
+      this.$emit('attrInfo', attr, attrValue)
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -78,7 +82,7 @@
     border-top: 1px solid #ddd;
     overflow: hidden;
 
-    .key {   
+    .key {
       width: 100px;
       background: #f1f1f1;
       line-height: 26px;
@@ -88,7 +92,7 @@
       padding: 10px 10px 0 15px;
       float: left;
     }
-    .brand{
+    .brand {
       margin: 0;
     }
     .value {
@@ -115,7 +119,7 @@
           color: #e1251b;
           font-style: italic;
           font-size: 14px;
-          &:hover{
+          &:hover {
             border: 1px solid #e1251b;
           }
           img {
@@ -159,9 +163,9 @@
         background: #fff;
         border: 1px solid #d5d5d5;
         color: #666;
-           &:hover{
-            border: 1px solid #e1251b;
-          }
+        &:hover {
+          border: 1px solid #e1251b;
+        }
       }
     }
   }

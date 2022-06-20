@@ -31,25 +31,25 @@
       
 <script>
 export default {
-  name: "Header",
+  name: 'Header',
   computed: {
     //用户名信息
     userName() {
-      return this.$store.state.user.userInfo.name;
+      return this.$store.state.user.userInfo.name
     },
   },
   methods: {
     //退出登录
     async logout() {
       try {
-        await this.$store.dispatch("userLogout");
-        this.$router.push('/home');
+        await this.$store.dispatch('userLogout')
+        this.$router.push('/home')
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
   },
-};
+}
 </script>
       
 <style lang="less" scope>

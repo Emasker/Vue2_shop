@@ -5,7 +5,7 @@
       <h3>
         注册新用户
         <span class="go"
-          >我有账号，去 <router-link to='/login'>登陆</router-link>
+          >我有账号，去 <router-link to="/login">登陆</router-link>
         </span>
       </h3>
       <div class="content">
@@ -17,7 +17,7 @@
           v-validate="{ required: true, regex: /^1\d{10}$/ }"
           :class="{ invalid: errors.has('phone') }"
         />
-        <span class="error-msg">{{ errors.first("phone") }}</span>
+        <span class="error-msg">{{ errors.first('phone') }}</span>
       </div>
       <div class="content">
         <label>验证码:</label>
@@ -31,7 +31,7 @@
         <button style="width: 100px; height: 37px" @click="getCode">
           获取验证码
         </button>
-        <span class="error-msg">{{ errors.first("code") }}</span>
+        <span class="error-msg">{{ errors.first('code') }}</span>
       </div>
       <div class="content">
         <label>登录密码:</label>
@@ -42,7 +42,7 @@
           v-validate="{ required: true, regex: /^[0-9A-Za-z]{8,20}$/ }"
           :class="{ invalid: errors.has('password') }"
         />
-        <span class="error-msg">{{ errors.first("password") }}</span>
+        <span class="error-msg">{{ errors.first('password') }}</span>
       </div>
       <div class="content">
         <label>登录密码:</label>
@@ -53,7 +53,7 @@
           v-validate="{ required: true, is: password }"
           :class="{ invalid: errors.has('password1') }"
         />
-        <span class="error-msg">{{ errors.first("password1") }}</span>
+        <span class="error-msg">{{ errors.first('password1') }}</span>
       </div>
       <div class="controls">
         <input
@@ -64,7 +64,7 @@
           :class="{ invalid: errors.has('agree') }"
         />
         <span>同意协议并注册《京东用户协议》</span>
-        <span class="error-msg">{{ errors.first("agree") }}</span>
+        <span class="error-msg">{{ errors.first('agree') }}</span>
       </div>
       <div class="btn">
         <button @click="userRegister">完成注册</button>
@@ -91,47 +91,47 @@
 
 <script>
 export default {
-  name: "Register",
+  name: 'Register',
   data() {
     return {
-      phone: "",
-      code: "",
-      password: "",
-      password1: "",
+      phone: '',
+      code: '',
+      password: '',
+      password1: '',
       agree: true,
-    };
+    }
   },
   methods: {
     //获取验证码
     async getCode() {
       try {
-        const { phone } = this;
-        phone && (await this.$store.dispatch("getCode", phone));
+        const { phone } = this
+        phone && (await this.$store.dispatch('getCode', phone))
         //自动填入验证码
-        this.code = this.$store.state.user.code;
+        this.code = this.$store.state.user.code
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
     },
     //用户注册确认
     async userRegister() {
-      const success = await this.$validator.validateAll(); //全部表单验证
+      const success = await this.$validator.validateAll() //全部表单验证
       if (success) {
         try {
-          const { phone, code, password } = this;
-            (await this.$store.dispatch("userRegister", {
-              phone,
-              code,
-              password,
-            }));
-          this.$router.push("/login");
+          const { phone, code, password } = this
+          await this.$store.dispatch('userRegister', {
+            phone,
+            code,
+            password,
+          })
+          this.$router.push('/login')
         } catch (error) {
-          alert(error.message);
+          alert(error.message)
         }
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

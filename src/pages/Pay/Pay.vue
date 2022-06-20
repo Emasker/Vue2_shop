@@ -91,80 +91,80 @@
 </template>
 
 <script>
-import QRCode from "qrcode";
+import QRCode from 'qrcode'
 export default {
-  name: "Pay",
+  name: 'Pay',
   data() {
     return {
       payInfo: {},
-    };
+    }
   },
   computed: {
     //订单号
     orderId() {
-      return this.$route.query.orderId;
+      return this.$route.query.orderId
     },
   },
   mounted() {
     //获取订单信息
-    this.getPayInfo();
+    this.getPayInfo()
   },
   methods: {
     //获取支付信息
     async getPayInfo() {
-      let result = await this.$API.reqPayInfo(this.orderId);
+      let result = await this.$API.reqPayInfo(this.orderId)
       if (result.code == 200) {
-        this.payInfo = result.data;
+        this.payInfo = result.data
       }
     },
     //弹出框
     async open() {
-      let url = await QRCode.toDataURL(this.payInfo.codeUrl);
-      this.$alert(`<img src=${url} />`, "微信支付", {
+      let url = await QRCode.toDataURL(this.payInfo.codeUrl)
+      this.$alert(`<img src=${url} />`, '微信支付', {
         dangerouslyUseHTMLString: true,
         center: true, //中间布局
         showCancelButton: true, //是否显示取消按钮
-        cancelButtonText: "支付遇见问题", //取消按钮的文本内容
-        confirmButtonText: "已支付成功", //确定按钮的文本
+        cancelButtonText: '支付遇见问题', //取消按钮的文本内容
+        confirmButtonText: '已支付成功', //确定按钮的文本
         showClose: false, //去掉右上角的叉子
         beforeClose: (type, instance, done) => {
           //type:区分取消|确定按钮
           //instance：当前组件实例
           //done:关闭弹出框的方法
-          if (type == "cancel") {
-            alert("请联系管理员Emasker");
-            clearInterval(this.timer);
-            this.timer = null;
+          if (type == 'cancel') {
+            alert('请联系管理员Emasker')
+            clearInterval(this.timer)
+            this.timer = null
             //关闭弹出框
-            done();
+            done()
           } else {
             //判断是否真的支付了
             // if (this.code == 200) {
-            clearInterval(this.timer);
-            this.timer = null;
-            done();
-            this.$router.push("/paysuccess");
+            clearInterval(this.timer)
+            this.timer = null
+            done()
+            this.$router.push('/paysuccess')
             // }
           }
         },
-      });
-       //定时器没了，开启一个新的定时器
+      })
+      //定时器没了，开启一个新的定时器
       if (!this.timer) {
         this.timer = setInterval(async () => {
           //发请求获取用户支付状态
-          let result = await this.$API.reqPayStatus(this.orderId);
+          let result = await this.$API.reqPayStatus(this.orderId)
           if (result.code == 200) {
-            clearInterval(this.timer);
-            this.timer = null;
-            this.code = result.code;
-            this.$msgbox.close();
-            this.$router.push("/paysuccess");
+            clearInterval(this.timer)
+            this.timer = null
+            this.code = result.code
+            this.$msgbox.close()
+            this.$router.push('/paysuccess')
           }
-        }, 1000);
+        }, 1000)
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -302,7 +302,7 @@ export default {
         display: inline-block;
         padding: 15px 45px;
         margin: 15px 0 10px;
-        font: 18px "微软雅黑";
+        font: 18px '微软雅黑';
         font-weight: 700;
         border-radius: 0;
         background-color: #e1251b;
